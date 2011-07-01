@@ -1,0 +1,29 @@
+Basic README for puppet zeroconf module
+
+Allows you to setup Zeroconf ( avahi ) and define services
+
+Test in this directory by running [sudo] ./test/run.sh [noop|reallyrun]
+
+- To install zeroconf:
+include "zeroconf"
+
+- To configure zeroconf service using a local config file:
+zeroconf::config { "default": source=> "puppet:///modules/MYMODULE/my_avahi_conf" }  
+
+- To configure zeroconf service using a local template file:
+zeroconf::config { "default": content=> $mycontent }  
+
+- To add/configure a new service configuration using a local config file
+zeroconf::service_config { "myservice": source=> "puppet:///modules/MYMODULE/my_avahi_service_conf" }  
+
+- To add/configure a new service configuration using a local template file:
+zeroconf::service_config { "myservice": content=> $mycontent }  
+
+
+### Example
+
+	zeroconf::service_config { smb: 
+		content => template("mymodule/zeroconf/smb.service.erb"),
+	}
+
+####
